@@ -3,7 +3,7 @@ import 'package:job_landing_course/core/utils/typedef.dart';
 abstract class OnBoardingRepository {
   const OnBoardingRepository();
 
-  ResultVoid cacheFisrtTimer();
+  ResultVoid cacheFirstTimer();
 
   ResultFuture<bool> checkIfUserIsFirstTimer();
 }

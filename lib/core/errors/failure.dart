@@ -24,6 +24,6 @@ class ServerFailure extends Failure {
         );
 }
 
-class ChaceFailure extends Failure {
-  ChaceFailure({required super.message, required super.statusCode});
+class CacheFailure extends Failure {
+  CacheFailure({required super.message, required super.statusCode});
 }

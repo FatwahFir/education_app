@@ -19,7 +19,7 @@ void main() {
   test("Should call a [Repo.cacheFirsttimer] and return the right data",
       () async {
     when(
-      () => repo.cacheFisrtTimer(),
+      () => repo.cacheFirstTimer(),
     ).thenAnswer(
       (_) async => Left(
         ServerFailure(message: "Unknown error", statusCode: 500),
@@ -35,7 +35,7 @@ void main() {
         ),
       ),
     );
-    verify(() => repo.cacheFisrtTimer()).called(1);
+    verify(() => repo.cacheFirstTimer()).called(1);
     verifyNoMoreInteractions(repo);
   });
 }
