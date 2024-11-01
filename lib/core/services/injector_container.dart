@@ -1,46 +1,52 @@
-// import 'package:get_it/get_it.dart';
-// import 'package:http/http.dart' as http;
+import 'package:get_it/get_it.dart';
+import 'package:job_landing_course/features/on_boarding/data/datasources/on_boarding_local_data_source.dart';
+import 'package:job_landing_course/features/on_boarding/data/repositories/on_boarding_repo_impl.dart';
+import 'package:job_landing_course/features/on_boarding/domain/repositories/on_boarding_repository.dart';
+import 'package:job_landing_course/features/on_boarding/domain/usecases/cache_first_timer.dart';
+import 'package:job_landing_course/features/on_boarding/domain/usecases/check_if_user_is_first_timer.dart';
+import 'package:job_landing_course/features/on_boarding/presentation/cubit/on_boarding_cubit.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-// final sl = GetIt.instance;
+final sl = GetIt.instance;
 
-// Future<void> init() async {
-//   sl
-//     //App logic (state management)
-//     ..registerFactory(
-//       () => AuthenticationCubit(
-//         createUser: sl(),
-//         getUsers: sl(),
-//       ),
-//     )
+Future<void> init() async {
+  final prefs = await SharedPreferences.getInstance();
 
-//     //Usecases
-//     ..registerLazySingleton(
-//       () => CreateUser(
-//         sl(),
-//       ),
-//     )
-//     ..registerLazySingleton(
-//       () => GetUsers(
-//         sl(),
-//       ),
-//     )
+  sl
+    //App logic (state management)
+    ..registerFactory(
+      () => OnBoardingCubit(
+        cacheFirstTimer: sl(),
+        checkIfUserIsFirstTimer: sl(),
+      ),
+    )
 
-//     //Repositories
-//     ..registerLazySingleton<AuthenticationRepository>(
-//       () => AuthenticationRepositoryImplementation(
-//         datasource: sl(),
-//       ),
-//     )
+    //Usecases
+    ..registerLazySingleton(
+      () => CacheFirstTimer(
+        repo: sl(),
+      ),
+    )
+    ..registerLazySingleton(
+      () => CheckIfUserIsFirstTimer(
+        repo: sl(),
+      ),
+    )
 
-//     //Datasources
-//     ..registerLazySingleton<AuthenticationRemoteDatasource>(
-//       () => AuthRemoteDataSrcImpl(
-//         client: sl(),
-//       ),
-//     )
+    //Repositories
+    ..registerLazySingleton<OnBoardingRepository>(
+      () => OnBoardingRepoImpl(
+        dataSource: sl(),
+      ),
+    )
 
-//     //External Dependencies
-//     ..registerLazySingleton(
-//       http.Client.new,
-//     );
-// }
+    //Datasources
+    ..registerLazySingleton<OnBoardingLocalDataSource>(
+      () => OnBoardingLocalDataSrcImpl(
+        prefs: sl(),
+      ),
+    )
+
+    //External Dependencies
+    ..registerLazySingleton(() => prefs);
+}
