@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:job_landing_course/core/extensions/context_extension.dart';
 import 'package:job_landing_course/core/res/colors.dart';
 import 'package:job_landing_course/core/res/fonts.dart';
 import 'package:job_landing_course/features/on_boarding/domain/entities/page_content.dart';
+import 'package:job_landing_course/features/on_boarding/presentation/cubit/on_boarding_cubit.dart';
 
 class OnBoardingBody extends StatelessWidget {
   const OnBoardingBody({super.key, required this.pageContent});
@@ -62,6 +64,7 @@ class OnBoardingBody extends StatelessWidget {
           onPressed: () {
             //TODO(Get-Started): Implements this functionality
             //Cache user
+            context.read<OnBoardingCubit>().cacheFirstTimer();
             //Push them to the appropriate screen
           },
           child: const Text(
