@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:job_landing_course/core/res/colors.dart';
 import 'package:job_landing_course/core/res/fonts.dart';
 import 'package:job_landing_course/core/services/injector_container.dart';
-import 'package:job_landing_course/services/router.dart';
+import 'package:job_landing_course/core/services/router.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();

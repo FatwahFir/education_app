@@ -78,6 +78,85 @@ void main() {
       );
     },
   );
+
+  group(
+    'checkIfUserIsFirstTimer',
+    () {
+      test(
+        'Should return true if user is first timer',
+        () async {
+          when(
+            () => dataSource.checkIfUserIsFirstTimer(),
+          ).thenAnswer(
+            (_) async => Future.value(true),
+          );
+
+          final res = await repo.checkIfUserIsFirstTimer();
+
+          expect(
+            res,
+            equals(
+              const Right<dynamic, bool>(true),
+            ),
+          );
+
+          verify(() => dataSource.checkIfUserIsFirstTimer()).called(1);
+          verifyNoMoreInteractions(dataSource);
+        },
+      );
+
+      test(
+        'Should return true if user is not first timer',
+        () async {
+          when(
+            () => dataSource.checkIfUserIsFirstTimer(),
+          ).thenAnswer(
+            (_) async => Future.value(false),
+          );
+
+          final res = await repo.checkIfUserIsFirstTimer();
+
+          expect(
+            res,
+            equals(
+              const Right<dynamic, bool>(false),
+            ),
+          );
+
+          verify(() => dataSource.checkIfUserIsFirstTimer()).called(1);
+          verifyNoMoreInteractions(dataSource);
+        },
+      );
+
+      test(
+        'Should return [CacheException] when error checking user',
+        () async {
+          when(
+            () => dataSource.checkIfUserIsFirstTimer(),
+          ).thenThrow(
+            const CacheException(message: "Insufficient storage"),
+          );
+
+          final res = await repo.checkIfUserIsFirstTimer();
+
+          expect(
+            res,
+            equals(
+              Left<CacheFailure, dynamic>(
+                CacheFailure(
+                  message: 'Insufficient storage',
+                  statusCode: 500,
+                ),
+              ),
+            ),
+          );
+
+          verify(() => dataSource.checkIfUserIsFirstTimer()).called(1);
+          verifyNoMoreInteractions(dataSource);
+        },
+      );
+    },
+  );
 }
 
 // void main() {
