@@ -1,12 +1,18 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:job_landing_course/core/res/colors.dart';
 import 'package:job_landing_course/core/res/fonts.dart';
 import 'package:job_landing_course/core/services/injector_container.dart';
 import 'package:job_landing_course/core/services/router.dart';
+import 'package:job_landing_course/firebase_options.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await init();
+
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
 
   runApp(const MyApp());
 }
