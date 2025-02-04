@@ -62,10 +62,8 @@ class OnBoardingBody extends StatelessWidget {
             foregroundColor: Colors.white,
           ),
           onPressed: () {
-            //TODO(Get-Started): Implements this functionality
             //Cache user
             context.read<OnBoardingCubit>().cacheFirstTimer();
-            //Push them to the appropriate screen
           },
           child: const Text(
             'Get Started',

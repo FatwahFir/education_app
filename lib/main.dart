@@ -1,10 +1,12 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:job_landing_course/core/common/app/providers/user_provider.dart';
 import 'package:job_landing_course/core/res/colors.dart';
 import 'package:job_landing_course/core/res/fonts.dart';
 import 'package:job_landing_course/core/services/injector_container.dart';
 import 'package:job_landing_course/core/services/router.dart';
 import 'package:job_landing_course/firebase_options.dart';
+import 'package:provider/provider.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -22,18 +24,22 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Education App',
-      theme: ThemeData(
-        visualDensity: VisualDensity.adaptivePlatformDensity,
-        colorScheme: ColorScheme.fromSwatch(accentColor: Colours.primaryColor),
-        appBarTheme: const AppBarTheme(
-          color: Colors.transparent,
+    return ChangeNotifierProvider(
+      create: (_) => UserProvider(),
+      child: MaterialApp(
+        title: 'Education App',
+        theme: ThemeData(
+          visualDensity: VisualDensity.adaptivePlatformDensity,
+          colorScheme:
+              ColorScheme.fromSwatch(accentColor: Colours.primaryColor),
+          appBarTheme: const AppBarTheme(
+            color: Colors.transparent,
+          ),
+          useMaterial3: true,
+          fontFamily: Fonts.poppins,
         ),
-        useMaterial3: true,
-        fontFamily: Fonts.poppins,
+        onGenerateRoute: generateRoute,
       ),
-      onGenerateRoute: generateRoute,
     );
   }
 }

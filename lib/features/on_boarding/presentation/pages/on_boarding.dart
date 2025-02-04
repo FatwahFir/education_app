@@ -35,7 +35,9 @@ class _OnBoardingState extends State<OnBoarding> {
         child: BlocConsumer<OnBoardingCubit, OnBoardingState>(
           listener: (context, state) {
             if (state is OnBoardingStatus && !state.isFirstTimer) {
-              Navigator.of(context).pushReplacementNamed('/home');
+              Navigator.pushReplacementNamed(context, '/home');
+            } else if (state is UserCached) {
+              Navigator.pushReplacementNamed(context, '/');
             }
           },
           builder: (context, state) {

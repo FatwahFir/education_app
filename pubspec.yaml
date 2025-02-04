@@ -61,6 +61,10 @@ dependencies:
   firebase_storage: ^12.3.4
   cloud_firestore: ^5.4.4
   firebase_ui_auth: ^1.16.0
+  google_sign_in_mocks: ^0.3.0
+  firebase_auth_mocks: ^0.14.1
+  fake_cloud_firestore: ^3.0.3
+  firebase_storage_mocks: ^0.7.0
 
 dev_dependencies:
   flutter_test:
