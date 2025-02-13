@@ -9,7 +9,7 @@ import 'package:job_landing_course/features/auth/data/models/local_user_model.da
 import 'package:job_landing_course/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:job_landing_course/features/auth/presentation/pages/sign_in.dart';
 import 'package:job_landing_course/features/auth/presentation/pages/sign_up.dart';
-import 'package:job_landing_course/features/dashboard/presentation/pages/dashboard.dart';
+import 'package:job_landing_course/features/dashboard/views/dashboard_view.dart';
 import 'package:job_landing_course/features/on_boarding/data/datasources/on_boarding_local_data_source.dart';
 import 'package:job_landing_course/features/on_boarding/presentation/cubit/on_boarding_cubit.dart';
 import 'package:job_landing_course/features/on_boarding/presentation/pages/on_boarding.dart';

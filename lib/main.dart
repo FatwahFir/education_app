@@ -1,10 +1,12 @@
 import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_ui_auth/firebase_ui_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:job_landing_course/core/common/app/providers/user_provider.dart';
 import 'package:job_landing_course/core/res/colors.dart';
 import 'package:job_landing_course/core/res/fonts.dart';
 import 'package:job_landing_course/core/services/injector_container.dart';
 import 'package:job_landing_course/core/services/router.dart';
+import 'package:job_landing_course/features/dashboard/providers/dashboard_controller.dart';
 import 'package:job_landing_course/firebase_options.dart';
 import 'package:provider/provider.dart';
 
@@ -16,6 +18,7 @@ Future<void> main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
 
+  FirebaseUIAuth.configureProviders([EmailAuthProvider()]);
   runApp(const MyApp());
 }
 
@@ -24,8 +27,11 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (_) => UserProvider(),
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => UserProvider()),
+        ChangeNotifierProvider(create: (_) => DashboardController()),
+      ],
       child: MaterialApp(
         title: 'Education App',
         theme: ThemeData(
